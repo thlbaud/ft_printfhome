@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:11:39 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 18:37:09 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 22:17:18 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ ssize_t	ft_putstr(char *str, size_t i)
 	return (len);
 }
 
-void	ft_counter(size_t *total, size_t len)
+size_t	ft_counter(int *total, int len)
 {
 	if (len == -1)
 		*total = -1;
 	else
 		*total += len;
+	return (*total);
 }

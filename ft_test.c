@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_test.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:20:25 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 16:59:32 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 20:44:21 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	printf("Tester printf ->\n\n");
 	if (argv[1][0] == 'c')
 	{
-		for (i = 0; i <= 127; i++)
+		for (i = 0; i <= 126; i++)
 		{
 			ft_printf("output ft_printf : %c\n", (char)i);
 			printf("output printf    : %c\n", (char)i);
