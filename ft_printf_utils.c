@@ -6,7 +6,7 @@
 /*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:11:39 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 14:41:56 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:37:09 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,23 @@ int	ft_putchar(char c)
 {
 	if (write(1, &c, 1) == -1)
 		return (-1);
-	return (0);
+	return (1);
 }
 
-int	ft_putstr(char *str)
+ssize_t	ft_putstr(char *str, size_t i)
 {
 	size_t	len;
 
 	len = ft_strlen(str);
-	if (write(1, &str[0], len) == -1)
+	if (write(1, &str[i], len) == -1)
 		return (-1);
-	return (0);
+	return (len);
+}
+
+void	ft_counter(size_t *total, size_t len)
+{
+	if (len == -1)
+		*total = -1;
+	else
+		*total += len;
 }

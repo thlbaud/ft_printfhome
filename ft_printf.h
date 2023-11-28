@@ -6,7 +6,7 @@
 /*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:13:41 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 14:46:22 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:37:32 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <unistd.h>
 
 int		ft_putchar(char c);
-int		ft_putstr(char *str);
+ssize_t	ft_putstr(char *str, size_t i);
 int		ft_printf(const char *prompt, ...);
 size_t	ft_strlen(const char *s);
+void	ft_counter(size_t *total, size_t len);
 
 #endif
