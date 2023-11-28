@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:12:08 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/27 15:12:42 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 12:23:49 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_putnbr_base(int nbr, char *base)
 	base_len = ft_strlen(base);
 	if (nbr == -2147483648)
 	{
-		ft_putstr("-2147483648", 11);
+		ft_putstr("-2147483648");
 		return (0);
 	}
 	if (nbr < 0)
 	{
-		ft_putstr("-", 1);
+		ft_putstr("-");
 		nbr *= -1;
 	}
 	if (nbr >= 10)
@@ -33,7 +33,8 @@ int	ft_putnbr_base(int nbr, char *base)
 		ft_putnbr_base(nbr / base_len, base);
 		write(1 , &base[nbr % base_len], 1);
 	}
-	write(1, &base[nbr % base_len], 1);
+	if (nbr < 10)
+		write(1, &base[nbr % base_len], 1);
 	return (0);	
 }
 
@@ -43,46 +44,51 @@ int	ft_find_conversion(char c, va_list parameters)
 	
 	error_handler = 0;
 	if (c == 'c')
-		error_handler = ft_putstr(va_arg(parameters, char *), 1);
-	if (c == 's')
-		error_handler = ft_putstr(va_arg(parameters, char *), 5);
+		error_handler = ft_putchar(va_arg(parameters, int));
+	else if (c == 's')
+		error_handler = ft_putstr(va_arg(parameters, char *));
 	/*if (c == 'p')*/
-	if (c == 'd')
-		error_handler = ft_putnbr_base(va_arg(parameters, double), "0123456789");
-	/*if (c == 'i')
-		error_handler = ft_putnbr_base(va_args(parameters, int), "0123456789");
-	if (c == 'u')
-		error_handler = ft_putnbr_base(va_args(parameters, unsigned double), "0123456789");
-	if (c == 'x')
-		error_handler = ft_putnbr_base(va_args(parameters, int), "0123456789abcdef");
-	if (c == 'X')
-		error_handler = ft_putnbr_base(va_args(parameters, int), "0123456789ABCDEF");
-	if (c == '%')*/
+	else if (c == 'd')
+		error_handler = ft_putnbr_base(va_arg(parameters, int), "0123456789");
+	else if (c == 'i')
+		error_handler = ft_putnbr_base(va_arg(parameters, int), "0123456789");
+	else if (c == 'u')
+		error_handler = ft_putnbr_base(va_arg(parameters, unsigned int), "0123456789");
+	else if (c == 'x')
+		error_handler = ft_putnbr_base(va_arg(parameters, unsigned int), "0123456789abcdef");
+	else if (c == 'X')
+		error_handler = ft_putnbr_base(va_arg(parameters, unsigned int), "0123456789ABCDEF");
+	/*if (c == '%')*/
+	return (error_handler);
 }
 
-int	ft_printf(const char *, ...)
+int	ft_printf(const char *prompt, ...)
 {
-	va_list(parameters);
-	char	*format;
+	va_list	parameters;
 	size_t	i;
+	size_t	count;
 	
 	i = 0;
-	va_start(parameters, format);
-	format = va_arg(parameters, char *);
-	while (format[i])
+	va_start(parameters, prompt);
+	while (prompt[i])
 	{
-		while (format[i] && format[i] != '%')
+		count = 0;
+		while (prompt[i] && prompt[i] != '%')
+		{
 			i++;
-		if (ft_putstr(format, i) == -1)
-			return (-1);
-		if (format[i] == '%')
+			count++;
+		}
+		if (write(1, &prompt[i - count], count) == -1)
+			return (va_end(parameters), -1);
+		if (prompt[i] == 0)
+			 break;
+		if (prompt[i] == '%' && ((prompt[i + 1] >= 'a' && prompt[i + 1] <= 'z') || prompt[i + 1] == 'X' || prompt[i + 1] == '%'))
+		{
+			if (ft_find_conversion(prompt[i + 1], parameters) == -1)
+				return (va_end(parameters), -1);
 			i++;
-		if ((format[i] >= 'a' && format[i] <= 'z') || format[i] == 'X' 
-				|| format[i] == '%')
-			if (ft_find_conversion(format[i], parameters) == -1)
-				return (-1);
+		}
 		i++;
 	}
-	va_end(parameters);
-	return (0);
+	return (va_end(parameters), 0);
 }
