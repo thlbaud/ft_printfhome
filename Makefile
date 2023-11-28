@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+         #
+#    By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 13:32:16 by tmouche           #+#    #+#              #
-#    Updated: 2023/11/26 14:08:02 by tmouche          ###   ########.fr        #
+#    Updated: 2023/11/28 14:43:05 by tmouche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = 
+SRCS = ft_printf_utils.c ft_printf.c
 
 OBJS	:=	$(SRCS:%.c=%.o)
 
-HEAD	:=	libftprintf.h
+HEAD	:=	ft_printf.h
 
 CFLAGS	:=	-Wall -Wextra -Werror
 
