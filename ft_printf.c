@@ -6,7 +6,7 @@
 /*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:12:08 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 15:11:20 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:08:21 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int	ft_putnbr_base(ssize_t nbr, char *base)
 	return (0);
 }
 
-int	ft_putnbr_base_ul(size_t nbr, char *base)
+int	ft_putnbr_bu(size_t nbr, char *base)
 {
 	size_t	base_len;
 
 	base_len = ft_strlen(base);
-	if (nbr >= 10)
+	if (nbr >= base_len)
 	{
-		ft_putnbr_base(nbr / base_len, base);
+		ft_putnbr_bu(nbr / base_len, base);
 		write(1, &base[nbr % base_len], 1);
 	}
-	if (nbr < 10)
+	if (nbr < base_len)
 		write(1, &base[nbr % base_len], 1);
 	return (0);
 }
@@ -57,7 +57,7 @@ int	ft_print_memory(size_t nbr)
 	}
 	if (ft_putstr("0x") == -1)
 		return (-1);
-	if (ft_putnbr_base_ul(nbr, "0123456789abcdef"))
+	if (ft_putnbr_bu(nbr, "0123456789abcdef"))
 		return (-1);
 	return (0);
 }
@@ -76,11 +76,11 @@ int	ft_find_conversion(char c, va_list para)
 	else if (c == 'd' || c == 'i')
 		err = ft_putnbr_base(va_arg(para, int), "0123456789");
 	else if (c == 'u')
-		err = ft_putnbr_base(va_arg(para, unsigned int), "0123456789");
+		err = ft_putnbr_bu(va_arg(para, unsigned int), "0123456789");
 	else if (c == 'x')
-		err = ft_putnbr_base(va_arg(para, unsigned int), "0123456789abcdef");
+		err = ft_putnbr_bu(va_arg(para, unsigned int), "0123456789abcdef");
 	else if (c == 'X')
-		err = ft_putnbr_base(va_arg(para, unsigned int), "0123456789ABCDEF");
+		err = ft_putnbr_bu(va_arg(para, unsigned int), "0123456789ABCDEF");
 	else if (c == '%')
 		err = write(1, "%", 1);
 	return (err);
