@@ -6,7 +6,7 @@
 /*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:12:08 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/29 11:31:30 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 11:38:24 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_print_memory(size_t nbr, int *len)
 int	ft_find_conversion(char c, va_list para)
 {
 	int	len[1];
-	
+
 	*len = 0;
 	if (c == 'c')
 		*len = ft_putchar(va_arg(para, int));
@@ -89,15 +89,15 @@ int	ft_find_conversion(char c, va_list para)
 	else if (c == 'X')
 		ft_putnbr_bu(va_arg(para, unsigned int), "0123456789ABCDEF", len);
 	else if (c == '%')
-		ft_counter(len ,write(1, "%", 1));
+		ft_counter(len, write(1, "%", 1));
 	return (*len);
 }
 
 int	ft_printf(const char *prompt, ...)
 {
 	va_list	para;
-	int	i;
-	int	total[1];
+	int		i;
+	int		total[1];
 
 	i = 0;
 	*total = 0;
@@ -106,7 +106,7 @@ int	ft_printf(const char *prompt, ...)
 		return (-1);
 	while (prompt[i])
 	{
-	 	ft_counter(total, ft_putstr_stoped((char *)&prompt[i]));
+		ft_counter(total, ft_putstr_stoped((char *)&prompt[i]));
 		while (prompt[i] != '%' && prompt[i])
 			i++;
 		if (*total == -1)
