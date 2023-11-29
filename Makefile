@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 13:32:16 by tmouche           #+#    #+#              #
-#    Updated: 2023/11/28 17:33:05 by tmouche          ###   ########.fr        #
+#    Updated: 2023/11/29 11:49:01 by tmouche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(NAME)	:	$(OBJS) Makefile
 			$(AR) $(NAME) $(OBJS)
 
 clean	:
-	rm -f $(OBJS) $(B_OBJS)
+	rm -f $(OBJS)
 
 fclean	:	clean
 				rm -f $(NAME)

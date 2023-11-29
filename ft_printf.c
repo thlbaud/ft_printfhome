@@ -6,14 +6,14 @@
 /*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:12:08 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/29 11:38:24 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 11:50:55 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
-void	ft_putnbr_base(ssize_t nbr, char *base, int *len)
+static void	ft_putnbr_base(ssize_t nbr, char *base, int *len)
 {
 	ssize_t	base_len;
 
@@ -37,7 +37,7 @@ void	ft_putnbr_base(ssize_t nbr, char *base, int *len)
 	return ;
 }
 
-void	ft_putnbr_bu(size_t nbr, char *base, int *len)
+static void	ft_putnbr_bu(size_t nbr, char *base, int *len)
 {
 	size_t	base_len;
 
@@ -56,7 +56,7 @@ void	ft_putnbr_bu(size_t nbr, char *base, int *len)
 	return ;
 }
 
-void	ft_print_memory(size_t nbr, int *len)
+static void	ft_print_memory(size_t nbr, int *len)
 {
 	if ((char *)nbr == NULL)
 	{
@@ -69,7 +69,7 @@ void	ft_print_memory(size_t nbr, int *len)
 	ft_putnbr_bu(nbr, "0123456789abcdef", len);
 }
 
-int	ft_find_conversion(char c, va_list para)
+static int	ft_find_conversion(char c, va_list para)
 {
 	int	len[1];
 
