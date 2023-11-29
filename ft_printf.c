@@ -6,7 +6,7 @@
 /*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:12:08 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 22:16:19 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 11:31:30 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_putnbr_base(ssize_t nbr, char *base, int *len)
 		ft_counter(len, write(1, "-", 1));
 		nbr *= -1;
 	}
-	if (nbr >= 16)
+	if (nbr >= base_len)
 	{
 		ft_putnbr_base(nbr / base_len, base, len);
 		ft_counter(len, write(1, &base[nbr % base_len], 1));
@@ -60,17 +60,13 @@ void	ft_print_memory(size_t nbr, int *len)
 {
 	if ((char *)nbr == NULL)
 	{
-		*len = ft_putstr("(nil)", 0);
-		if (*len == -1)
-			return ;
+		*len = ft_putstr("(nil)");
+		return ;
 	}
-	*len = ft_putstr("0x" ,0);
+	*len = ft_putstr("0x");
 	if (*len == -1)
 		return ;
 	ft_putnbr_bu(nbr, "0123456789abcdef", len);
-	if (*len == -1)
-		return ;
-	*len += 2;
 }
 
 int	ft_find_conversion(char c, va_list para)
@@ -79,9 +75,9 @@ int	ft_find_conversion(char c, va_list para)
 	
 	*len = 0;
 	if (c == 'c')
-		ft_putchar(va_arg(para, int));
+		*len = ft_putchar(va_arg(para, int));
 	else if (c == 's')
-		ft_putstr(va_arg(para, char *), 0);
+		*len = ft_putstr(va_arg(para, char *));
 	else if (c == 'p')
 		ft_print_memory(va_arg(para, size_t), len);
 	else if (c == 'd' || c == 'i')
@@ -103,26 +99,25 @@ int	ft_printf(const char *prompt, ...)
 	int	i;
 	int	total[1];
 
-	i = -1;
+	i = 0;
 	*total = 0;
 	va_start(para, prompt);
 	if (!prompt)
 		return (-1);
-	while (prompt[++i])
+	while (prompt[i])
 	{
-	 	ft_counter(total, ft_putstr((char *)prompt, i));
+	 	ft_counter(total, ft_putstr_stoped((char *)&prompt[i]));
 		while (prompt[i] != '%' && prompt[i])
 			i++;
 		if (*total == -1)
 			return (va_end(para), -1);
 		if (prompt[i] == 0)
 			break ;
-		if (prompt[i] == '%' && prompt[i + 1])
-		{
-			ft_counter(total, ft_find_conversion(prompt[++i], para));
-			if (*total == -1)
-				return (va_end(para), -1);
-		}
+		i++;
+		ft_counter(total, ft_find_conversion(prompt[i], para));
+		if (*total == -1)
+			return (va_end(para), -1);
+		i++;
 	}
 	return (va_end(para), *total);
 }

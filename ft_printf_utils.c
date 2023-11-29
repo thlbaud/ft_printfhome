@@ -6,7 +6,7 @@
 /*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:11:39 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/28 22:17:18 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 11:28:02 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] && s[i] != '%')
+	if (!s)
+		return (0);
+	while (s[i])
 		i++;
 	return (i);
 }
@@ -29,12 +31,31 @@ int	ft_putchar(char c)
 	return (1);
 }
 
-ssize_t	ft_putstr(char *str, size_t i)
+ssize_t	ft_putstr(char *str)
 {
 	size_t	len;
 
 	len = ft_strlen(str);
-	if (write(1, &str[i], len) == -1)
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	if (write(1, &str[0], len) == -1)
+		return (-1);
+	return (len);
+}
+
+ssize_t	ft_putstr_stoped(char *str)
+{
+	size_t	len;
+
+	len = 0;
+	if (!str)
+		return (0);
+	while (str[len] && str[len] != '%')
+		len++;
+	if (write(1, &str[0], len) == -1)
 		return (-1);
 	return (len);
 }
