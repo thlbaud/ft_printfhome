@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:13:41 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/29 11:51:13 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:37:59 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ ssize_t	ft_putstr(char *str);
 int		ft_printf(const char *prompt, ...);
 size_t	ft_strlen(const char *s);
 ssize_t	ft_putstr_stoped(char *str);
-size_t	ft_counter(int *total, int len);
+int	ft_counter(int *total, int len);
 
 #endif

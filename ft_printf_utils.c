@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmouche < tmouche@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:11:39 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/29 11:28:02 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:37:26 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ ssize_t	ft_putstr(char *str)
 
 	len = ft_strlen(str);
 	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+		return (write(1, "(null)", 6));
 	if (write(1, &str[0], len) == -1)
 		return (-1);
 	return (len);
@@ -60,7 +57,7 @@ ssize_t	ft_putstr_stoped(char *str)
 	return (len);
 }
 
-size_t	ft_counter(int *total, int len)
+int	ft_counter(int *total, int len)
 {
 	if (len == -1)
 		*total = -1;
