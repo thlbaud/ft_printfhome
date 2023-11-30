@@ -6,13 +6,13 @@
 /*   By: tmouche <tmouche@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:13:41 by tmouche           #+#    #+#             */
-/*   Updated: 2023/11/29 18:37:59 by tmouche          ###   ########.fr       */
+/*   Updated: 2023/11/30 15:30:01 by tmouche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdio.h>
+# include <stddef.h>
 # include <unistd.h>
 
 int		ft_putchar(char c);
